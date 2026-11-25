@@ -1,3 +1,20 @@
+// Duskline Kitchen Rush — Milo the cat chef runs a dusk-lit kitchen.
+// ---------------------------------------------------------------------------
+// This entrypoint hands the game in: it copies the finished kitchen (game/)
+// and its screenshots to the output folder and writes the dossier.json the
+// judge reads. The game itself is plain static files — canvas art, WebAudio
+// bleeps, no assets, no network.
+//
+// What Milo does in a 150-second shift: tickets land on the order board with
+// patience draining away; Milo grabs ingredients from nine bins, chops the
+// greens three times on the board, fries patties, eggs and potatoes on two
+// burners (leave them and they burn), stacks each recipe on one of two
+// plates, and serves at the window before the ticket expires. Quick serves
+// earn tips, back-to-back serves build a combo up to x1.75, and every expired
+// ticket costs one of three hearts. Survive the shift and the next day gets
+// harder — six recipes in all across days one to three, faster tickets,
+// shorter patience. Controls: WASD/arrows or click-to-walk, E/Space to use a
+// station, Q to bin something, P to pause, M to mute.
 // A working best-game-01 entry (Node 22, standard library only): the game is this directory's
 // game/ folder, plain static files a desktop browser loads offline (game/index.html and its ES
 // modules, no library and no network request), and the program hands it in. It copies game/ and
@@ -16,6 +33,10 @@ import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-game.ts';
+
+// The game's title, as shown on the title screen (game/index.html) — kept
+// here so the entrypoint and the game agree on one name.
+export const GAME_TITLE = 'Duskline Kitchen Rush';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
